@@ -27,7 +27,7 @@ import Weather from './components/weather';
 
  
   return (
-    <div className="App">
+    <div className="app">
       {(typeof data.main != 'undefined') ? (
         <Weather weatherData={data}/>
       ): (
