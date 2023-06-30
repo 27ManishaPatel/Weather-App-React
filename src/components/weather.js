@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './styles.css';
 import moment from 'moment';
+import { FaSearchLocation } from "react-icons/fa";
 
 function Weather({ weatherData }) {
+  const [input, setInput] = useState('');
+
+  const handleChange = (e) => {
+    setInput(e.target.value)
+  }
+  const handleClick = () => {
+    console.log(input);
+    setInput('')
+  }
+
   return (
     <div className="wrapper">
       <header>
         <h1>Weather in</h1>
         <div>
-          <input type="text" id="search-location" placeholder="Search"></input>
-          <button id="btn" type="submit"><i class="fa fa-search"></i></button>
+          <input
+            type="text"
+            id="input"
+            name="input"
+            value={input}
+            onChange={handleChange}
+            placeholder="Search"></input>
+          <button
+            className="btn"
+            id="btn"
+            type="submit"
+            onClick={handleClick}><FaSearchLocation className="searchIcon" /></button>
         </div>
+        <h1>{input}</h1>
       </header>
       <main>
         <div>
@@ -21,7 +43,7 @@ function Weather({ weatherData }) {
           </div>
 
           <div class="weather-info">
-            
+
             <div class="temp-icon">
               <p className="temperature">{weatherData.main.temp} &deg;C</p>
               <p>Feels Like: {weatherData.main.feels_like}&deg;</p>
@@ -30,13 +52,15 @@ function Weather({ weatherData }) {
                 <p className="description">{weatherData.weather[0].description}</p>
               </div>
             </div>
-
-            <div class="parameter">
-              <p className="sunset">Sunset: {new Date(weatherData.sys.sunset * 1000).getHours()}:{new Date(weatherData.sys.sunset * 1000).getMinutes()} </p>
-              <p>Humadity: {weatherData.main.humidity}</p>
-              <p>Wind Speed: {weatherData.wind.speed}</p>
+            <div className="map-box">
+              <div id="map"></div>
+              <div class="parameter">
+                <p className="sunset">Sunset: {new Date(weatherData.sys.sunset * 1000).getHours()}:{new Date(weatherData.sys.sunset * 1000).getMinutes()} </p>
+                <p>Humadity: {weatherData.main.humidity}</p>
+                <p>Wind Speed: {weatherData.wind.speed}</p>
+              </div>
             </div>
-            <div id="map"></div>
+
           </div>
 
         </div>

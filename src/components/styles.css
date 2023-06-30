@@ -8,8 +8,13 @@
   /* background-color: rgb(65, 124, 153); */
   background: #000000d0;
   color: white;
+  padding-top: 10px;
 }
 
+.searchIcon{
+margin: auto;
+font-size: 25px;
+}
 @media only screen and (max-width: 1200px) {
   .wrapper {
       margin: auto;
@@ -36,7 +41,7 @@ header div {
 header input {
   border: 1px solid black;
   border-radius: 25px;
-  width: 250px;
+  width: 60%;
   height: 40px;
   margin-left: 20px;
   padding: 0px 20px;
@@ -46,23 +51,12 @@ header input {
 header button {
   border: 1px solid black;
   border-radius: 25px;
-  width: 50px;
+  width: 15%;
   height: 40px;
   padding: 0px 5px;
   font-size: 22px;
 }
 
-@media only screen and (max-width: 690px) {
-  header input {
-      width: 200px;
-  }
-}
-
-@media only screen and (max-width: 1260px) {
-  header input {
-      width: 150px;
-  }
-}
 
 h6 {
   font-size: 22px;
@@ -122,22 +116,19 @@ span {
 }
 
 
-
+.map-box{
+  display: flex;
+}
 .parameter {
-  float: right;
   margin-top: 30px;
   margin-right: 20px;
+ margin: auto;
 }
 
 #map {
   border: 1px solid white;
   width: 160px;
   height: 200px;
-  margin: 10px;
-}
-
-@media only screen and (max-width: 1200px) {
-  #map {
-      width: 160px;
-  }
+  margin-left: 25px;
+  margin-bottom: 25px;
 }
