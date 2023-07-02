@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import './styles.css';
-import moment from 'moment';
+import Parameters from "./parameters";
 import { FaSearchLocation } from "react-icons/fa";
 
-function Weather({ weatherData }) {
+function Weather({ weatherData , lat, long}) {
   const [input, setInput] = useState('');
+  const [searchData, setSearchData] = useState('');
 
   const handleChange = (e) => {
     setInput(e.target.value)
   }
   const handleClick = () => {
-    console.log(input);
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=0f8c88146a435b8db9d6af1cacbbc02a`)
+      .then(response => response.json())
+      .then(data => {
+        setSearchData(data)
+      });
+    console.log(searchData)
     setInput('')
   }
 
@@ -34,37 +40,7 @@ function Weather({ weatherData }) {
         </div>
         <h1>{input}</h1>
       </header>
-      <main>
-        <div>
-          <h6>Weather in {weatherData.name} </h6>
-          <p className="sunrise">Sunrise: {new Date(weatherData.sys.sunrise * 1000).getHours()} :{new Date(weatherData.sys.sunrise * 1000).getMinutes()}</p>
-          <div class="date-box">
-            <p><span>{moment().format('L')} {moment().format('dddd')}</span> <span>{new Date().getHours() + ":" + new Date().getMinutes()}</span></p>
-          </div>
-
-          <div class="weather-info">
-
-            <div class="temp-icon">
-              <p className="temperature">{weatherData.main.temp} &deg;C</p>
-              <p>Feels Like: {weatherData.main.feels_like}&deg;</p>
-              <div class="cloud-icon-text">
-                <img src={"https://openweathermap.org/img/wn/" + weatherData.weather[0].icon + "@2x.png"} alt="Weathericon"></img>
-                <p className="description">{weatherData.weather[0].description}</p>
-              </div>
-            </div>
-            <div className="map-box">
-              <div id="map"></div>
-              <div class="parameter">
-                <p className="sunset">Sunset: {new Date(weatherData.sys.sunset * 1000).getHours()}:{new Date(weatherData.sys.sunset * 1000).getMinutes()} </p>
-                <p>Humadity: {weatherData.main.humidity}</p>
-                <p>Wind Speed: {weatherData.wind.speed}</p>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </main>
+      <Parameters weatherData={weatherData} lat={lat} long={long} />
     </div>)
 }
 export default Weather;
